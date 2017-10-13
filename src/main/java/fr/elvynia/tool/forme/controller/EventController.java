@@ -13,51 +13,58 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import fr.elvynia.tool.forme.entity.Company;
-import fr.elvynia.tool.forme.service.CompanyService;
+import fr.elvynia.tool.forme.entity.Event;
+import fr.elvynia.tool.forme.service.EventService;
 
 @Controller
-@RequestMapping("/company")
-public class CompanyController extends BaseController<CompanyService, Company> {
+@RequestMapping("/event")
+public class EventController extends BaseController<EventService, Event> {
 
 	@Override
 	@ResponseBody
 	@PostMapping({ "", "/" })
-	public Company create(@RequestBody final Company company) {
-		return super.create(company);
+	public Event create(@RequestBody final Event Event) {
+		return super.create(Event);
 	}
 
 	@Override
-	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Integer id) {
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable final Integer id) {
 		super.delete(id);
 	}
 
 	@Override
 	@ResponseBody
 	@RequestMapping("/{id}")
-	public Company get(@PathVariable final Integer id) {
+	public Event get(@PathVariable final Integer id) {
 		return super.get(id);
 	}
 
 	@Override
 	@ResponseBody
-	@RequestMapping({ "", "/" })
-	public List<Company> list() {
+	@RequestMapping("")
+	public List<Event> list() {
 		return super.list();
 	}
 
 	@ResponseBody
+	@RequestMapping("/")
+	public List<Event> list(@RequestParam final Integer missionId) {
+		return this.service.listByMission(missionId);
+	}
+
+	@ResponseBody
 	@PutMapping({ "", "/" })
-	public Company update(@RequestBody final Company company, final HttpServletResponse response) throws IOException {
-		if (company.getId() == null) {
+	public Event update(@RequestBody final Event Event, final HttpServletResponse response) throws IOException {
+		if (Event.getId() == null) {
 			response.sendError(HttpStatus.BAD_REQUEST.value(), "Property id is missing to update.");
 			return null;
 		}
-		return super.update(company);
+		return super.update(Event);
 	}
 }

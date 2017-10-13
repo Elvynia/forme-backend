@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.elvynia.tool.forme.dao.MissionDao;
+import fr.elvynia.tool.forme.entity.Event;
 import fr.elvynia.tool.forme.entity.Mission;
 
 @Service
@@ -28,6 +29,11 @@ public class MissionService implements FormeService<Mission> {
 	@Override
 	public List<Mission> list() {
 		return this.missionDao.findAll();
+	}
+
+	public List<Event> listEvents(Integer missionId) {
+		final Mission mission = this.missionDao.findOne(missionId);
+		return mission.getEvents();
 	}
 
 	@Override

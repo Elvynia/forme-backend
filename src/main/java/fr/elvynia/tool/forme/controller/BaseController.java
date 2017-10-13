@@ -10,7 +10,7 @@ import fr.elvynia.tool.forme.service.FormeService;
 public class BaseController<SERVICE extends FormeService<ENTITY>, ENTITY> {
 
 	@Autowired
-	private SERVICE service;
+	protected SERVICE service;
 
 	public ENTITY create(final ENTITY entity) {
 		return this.service.create(entity);
