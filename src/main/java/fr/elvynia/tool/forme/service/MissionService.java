@@ -43,7 +43,7 @@ public class MissionService implements FormeService<Mission> {
 
 	@Override
 	public Mission update(Mission entity) {
-		return this.update(entity);
+		return this.missionDao.save(entity);
 	}
 
 }

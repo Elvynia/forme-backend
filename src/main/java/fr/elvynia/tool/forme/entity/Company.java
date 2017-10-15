@@ -38,7 +38,7 @@ public class Company implements Serializable {
 	private String siren;
 
 	@Column
-	@Length(min = 13, max = 13)
+	@Length(min = 14, max = 14)
 	private String siret;
 
 	@Column

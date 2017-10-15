@@ -37,6 +37,9 @@ public class Invoice implements Serializable {
 	private Integer id;
 
 	@Column
+	private String label;
+
+	@Column
 	private Boolean pending;
 
 	@Column
@@ -71,6 +74,10 @@ public class Invoice implements Serializable {
 
 	public Integer getId() {
 		return this.id;
+	}
+
+	public String getLabel() {
+		return this.label;
 	}
 
 	public Boolean getPending() {
@@ -110,6 +117,10 @@ public class Invoice implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public void setPending(Boolean pending) {
