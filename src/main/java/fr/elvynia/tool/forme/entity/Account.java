@@ -15,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Account implements UserDetails {
@@ -85,6 +86,7 @@ public class Account implements UserDetails {
 		this.id = id;
 	}
 
+	@JsonProperty
 	public void setPassword(String pasword) {
 		this.password = pasword;
 	}

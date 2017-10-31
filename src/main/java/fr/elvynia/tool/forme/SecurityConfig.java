@@ -18,15 +18,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import fr.elvynia.tool.forme.filter.JWTAuthenticationFilter;
+import fr.elvynia.tool.forme.filter.JWTLoginFilter;
 import fr.elvynia.tool.forme.service.AuthService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	public static final String PATH_API = "/api/";
+	public static final String PATH_LOGIN = "/login";
 
 	@Autowired
 	private AuthService authService;
@@ -42,9 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authenticationProvider(this.authenticationProvider());
-		http.authorizeRequests().expressionHandler(this.webExpressionHandler()).antMatchers("/login").permitAll()
-				.antMatchers("/api/**").authenticated().and().httpBasic().and().csrf().disable().cors()
-				.configurationSource(this.corsConfigurationSource());
+		http.authorizeRequests().expressionHandler(this.webExpressionHandler()).antMatchers(SecurityConfig.PATH_LOGIN)
+				.permitAll().antMatchers(SecurityConfig.PATH_API.concat("**")).authenticated().and().httpBasic().and()
+				.csrf().disable().cors().configurationSource(this.corsConfigurationSource()).and()
+				.addFilterBefore(new JWTLoginFilter(SecurityConfig.PATH_LOGIN, this.authenticationManager()),
+						UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		// .and().csrf();
 	}
 
