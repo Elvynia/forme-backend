@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +35,9 @@ public class Account implements UserDetails {
 	@JoinColumn(name = "roleId", referencedColumnName = "id")
 	private Role role;
 
+	@Transient
+	private String token;
+
 	@Column
 	private String username;
 
@@ -55,6 +59,10 @@ public class Account implements UserDetails {
 	@JsonIgnore
 	public Role getRole() {
 		return this.role;
+	}
+
+	public String getToken() {
+		return this.token;
 	}
 
 	@Override
@@ -93,6 +101,10 @@ public class Account implements UserDetails {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public void setUsername(String username) {
