@@ -30,6 +30,9 @@ public class Mission implements Serializable {
 	private Company client;
 
 	@Column
+	private Boolean closed;
+
+	@Column
 	private Integer duration;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
@@ -57,7 +60,7 @@ public class Mission implements Serializable {
 	private Boolean travelCosts;
 
 	@Column
-	private int type;
+	private Integer type;
 
 	public Company getClient() {
 		return this.client;
@@ -70,6 +73,10 @@ public class Mission implements Serializable {
 		} else {
 			return null;
 		}
+	}
+
+	public Boolean getClosed() {
+		return this.closed;
 	}
 
 	public Integer getDuration() {
@@ -117,6 +124,10 @@ public class Mission implements Serializable {
 		final Company company = new Company();
 		company.setId(clientId);
 		this.client = company;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
 	}
 
 	public void setDuration(Integer duration) {
