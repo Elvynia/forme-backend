@@ -2,13 +2,17 @@ package fr.elvynia.tool.forme.entity;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -22,6 +26,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Account implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Responsability", joinColumns = @JoinColumn(name = "accountId", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "companyId", referencedColumnName = "id"))
+	private List<Company> companies;
 
 	@Id
 	@Column
@@ -42,8 +51,14 @@ public class Account implements UserDetails {
 	private String username;
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Arrays.asList(this.role);
+	}
+
+	@JsonIgnore
+	public List<Company> getCompanies() {
+		return this.companies;
 	}
 
 	public Integer getId() {
@@ -56,7 +71,6 @@ public class Account implements UserDetails {
 		return this.password;
 	}
 
-	@JsonIgnore
 	public Role getRole() {
 		return this.role;
 	}
@@ -88,6 +102,10 @@ public class Account implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public void setCompanies(List<Company> companies) {
+		this.companies = companies;
 	}
 
 	public void setId(Integer id) {
