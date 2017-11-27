@@ -27,7 +27,7 @@ public class Account implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Responsability", joinColumns = @JoinColumn(name = "accountId", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "companyId", referencedColumnName = "id"))
 	private List<Company> companies;
@@ -56,7 +56,6 @@ public class Account implements UserDetails {
 		return Arrays.asList(this.role);
 	}
 
-	@JsonIgnore
 	public List<Company> getCompanies() {
 		return this.companies;
 	}
