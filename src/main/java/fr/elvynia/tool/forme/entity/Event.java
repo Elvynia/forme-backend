@@ -11,10 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 @Entity
 public class Event implements Serializable {
 
@@ -30,7 +26,6 @@ public class Event implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "missionId", referencedColumnName = "id")
-	@JsonIgnore
 	private Mission mission;
 
 	@Column
@@ -48,15 +43,6 @@ public class Event implements Serializable {
 		return this.mission;
 	}
 
-	@JsonGetter
-	public Integer getMissionId() {
-		if (this.mission != null) {
-			return this.mission.getId();
-		} else {
-			return null;
-		}
-	}
-
 	public Date getStart() {
 		return this.start;
 	}
@@ -70,13 +56,6 @@ public class Event implements Serializable {
 	}
 
 	public void setMission(Mission mission) {
-		this.mission = mission;
-	}
-
-	@JsonSetter
-	public void setMissionId(Integer MissionId) {
-		final Mission mission = new Mission();
-		mission.setId(MissionId);
 		this.mission = mission;
 	}
 

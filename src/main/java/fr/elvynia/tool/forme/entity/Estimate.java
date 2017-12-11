@@ -11,10 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 @Entity
 public class Estimate implements Serializable {
 
@@ -25,7 +21,6 @@ public class Estimate implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "client_id", referencedColumnName = "id")
-	@JsonIgnore
 	private Company client;
 
 	@Column
@@ -47,15 +42,6 @@ public class Estimate implements Serializable {
 		return this.client;
 	}
 
-	@JsonGetter
-	public Integer getClientId() {
-		if (this.client != null) {
-			return this.client.getId();
-		} else {
-			return null;
-		}
-	}
-
 	public Date getDate() {
 		return this.date;
 	}
@@ -74,13 +60,6 @@ public class Estimate implements Serializable {
 
 	public void setClient(Company client) {
 		this.client = client;
-	}
-
-	@JsonSetter
-	public void setClientId(Integer clientId) {
-		final Company company = new Company();
-		company.setId(clientId);
-		this.client = company;
 	}
 
 	public void setDate(Date date) {
