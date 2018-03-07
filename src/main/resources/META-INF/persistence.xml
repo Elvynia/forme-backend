@@ -7,11 +7,11 @@
     <persistence-unit name="forme">
     	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     	<properties>
-    		<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-    		<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/forme?useSSL=false"/>
-    		<property name="hibernate.connection.user" value="root"/>
-    		<property name="hibernate.connection.password" value="root"/>
-    		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
+    		<property name="hibernate.connection.driver_class" value="${env.db.driver}" />
+    		<property name="hibernate.connection.url" value="${env.db.url}"/>
+    		<property name="hibernate.connection.user" value="${env.db.user}"/>
+    		<property name="hibernate.connection.password" value="${env.db.password}"/>
+    		<property name="hibernate.dialect" value="${env.db.dialect}"/>
     		<property name="hibernate.hbm2ddl.auto" value="update"/>
     	</properties>
     </persistence-unit>
