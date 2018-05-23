@@ -164,7 +164,7 @@
 			</activation>
 			<properties>
 				<env.db.driver>com.mysql.jdbc.Driver</env.db.driver>
-				<env.db.url>jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_b1ba371c94e7ade?reconnect=true</env.db.url>
+				<env.db.url>jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_b1ba371c94e7ade?autoReconnect=true</env.db.url>
 				<env.db.user>bf48fddc247a79</env.db.user>
 				<env.db.password>fd8138cd</env.db.password>
 				<env.db.dialect>org.hibernate.dialect.MySQL57Dialect</env.db.dialect>
