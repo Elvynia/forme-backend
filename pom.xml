@@ -153,8 +153,8 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<env.db.driver>com.mysql.cj.jdbc.Driver</env.db.driver>
-				<env.db.url>jdbc:mysql://localhost:3306/forme?useSSL=false&amp;amp;serverTimezone=UTC</env.db.url>
+				<env.db.driver>com.mysql.jdbc.Driver</env.db.driver>
+				<env.db.url>jdbc:mysql://localhost:3306/forme?useSSL=false&amp;amp;reconnect=true</env.db.url>
 				<env.db.user>root</env.db.user>
 				<env.db.password>root</env.db.password>
 				<env.db.dialect>org.hibernate.dialect.MySQL57Dialect</env.db.dialect>
@@ -168,10 +168,10 @@
 				</property>
 			</activation>
 			<properties>
-				<env.db.driver>com.mysql.cj.jdbc.Driver</env.db.driver>
-				<env.db.url>jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_b1ba371c94e7ade?reconnect=true&amp;amp;serverTimezone=UTC</env.db.url>
-				<env.db.user>bf48fddc247a79</env.db.user>
-				<env.db.password>fd8138cd</env.db.password>
+				<env.db.driver>com.mysql.jdbc.Driver</env.db.driver>
+				<env.db.url>jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_272aad520678b95?reconnect=true</env.db.url>
+				<env.db.user>be2a0a6454f7da</env.db.user>
+				<env.db.password>0600fe3c</env.db.password>
 				<env.db.dialect>org.hibernate.dialect.MySQL57Dialect</env.db.dialect>
 			</properties>
 		</profile>
